@@ -1,56 +1,102 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Full-Screen Responsive Image</title>
-  <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Metro Information</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
 
-    html, body {
-      height: 100%;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      background-color: #000;
-      overflow: hidden;
-    }
+      html,
+      body {
+        height: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        overflow: hidden;
+      }
 
-    img {
-      max-width: 100%;
-      max-height: 100%;
-      width: auto;
-      height: auto;
-      object-fit: contain;
-    }
-  </style>
-</head>
-<body>
+      img {
+        max-width: 100%;
+        max-height: 100%;
+        width: auto;
+        height: auto;
+        object-fit: contain;
+      }
 
-  <!-- Placeholder for the image -->
-  <img id="languageImage" src="assets/en.jpg" alt="Full-Screen Image">
+      #languageBtn {
+        position: absolute;
+        top: 10px;
+        background-color: purple;
+        color: white;
+        left: 10px;
+        min-width: 100px;
+        border: none;
+        outline: none;
+        padding: 10px;
+        padding-right: 20px;
+        padding-left: 20px;
+        border-radius: 10px;
+      }
+    </style>
+  </head>
+  <body>
+    <button id="languageBtn"></button>
+    <!-- Placeholder for the image -->
+    <img id="languageImage" src="assets/mar.jpg" alt="Full-Screen Image" />
 
-  <script>
-    // Function to get URL parameter
-    function getQueryParam(param) {
-      const urlParams = new URLSearchParams(window.location.search);
-      return urlParams.get(param);
-    }
+    <script>
+      var languages = {
+        en: "English",
+        mar: "मराठी",
+      };
+      var language = languages.mar;
+      const languageBtn = document.getElementById("languageBtn");
+      languageBtn.innerHTML =
+        language === languages.en ? languages.mar : languages.en;
 
-    // Set the image source based on the language parameter
-    const language = getQueryParam('lang');
-    const imageElement = document.getElementById('languageImage');
+      function toggleLang() {
+        switch (language) {
+          case languages.en:
+            language = languages.mar;
+            break;
+          case languages.mar:
+            language = languages.en;
+            break;
+          default:
+            language = languages.mar;
+            break;
+        }
+        console.log('new lang', language)
+        updateimage()
+        languageBtn.innerHTML =
+        language === languages.en ? languages.mar : languages.en;
+      }
 
-    if (language === 'mar') {
-      imageElement.src = 'assets/mar.jpg';
-    } else {
-      // Default to en.jpg if no language parameter or if it’s not 'mr'
-      imageElement.src = 'assets/en.jpg';
-    }
-  </script>
-</body>
+      // Function to get URL parameter
+      // function getQueryParam(param) {
+      //   const urlParams = new URLSearchParams(window.location.search);
+      //   return urlParams.get(param);
+      // }
+
+      // Set the image source based on the language parameter
+      // language = getQueryParam('lang');
+      const imageElement = document.getElementById("languageImage");
+
+      function updateimage() {
+        if (language === languages.mar) {
+          imageElement.src = "assets/mar.jpg";
+        } else {
+          // Default to en.jpg if no language parameter or if it’s not 'mr'
+          imageElement.src = "assets/en.jpg";
+        }
+      }
+
+      languageBtn.addEventListener("click", toggleLang);
+    </script>
+  </body>
 </html>
