@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Full-Screen Responsive Image</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html, body {
+      height: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background-color: #000;
+      overflow: hidden;
+    }
+
+    img {
+      max-width: 100%;
+      max-height: 100%;
+      width: auto;
+      height: auto;
+      object-fit: contain;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Placeholder for the image -->
+  <img id="languageImage" src="assets/en.jpg" alt="Full-Screen Image">
+
+  <script>
+    // Function to get URL parameter
+    function getQueryParam(param) {
+      const urlParams = new URLSearchParams(window.location.search);
+      return urlParams.get(param);
+    }
+
+    // Set the image source based on the language parameter
+    const language = getQueryParam('lang');
+    const imageElement = document.getElementById('languageImage');
+
+    if (language === 'mar') {
+      imageElement.src = 'assets/mar.jpg';
+    } else {
+      // Default to en.jpg if no language parameter or if it’s not 'mr'
+      imageElement.src = 'assets/en.jpg';
+    }
+  </script>
+</body>
+</html>
